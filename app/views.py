@@ -4,4 +4,6 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request,'usuario-in-adoptar.html')
+    return render(request,'index.html')
+
+
