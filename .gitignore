@@ -147,3 +147,5 @@ compiled/
 
 # Migrations directories
 migrations/
+
+/.idea
