@@ -18,10 +18,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from app import views
+from app import views,auth
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
+    url(r'^signup/$', auth.signup, name='signup'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^home/', views.home, name='home'),

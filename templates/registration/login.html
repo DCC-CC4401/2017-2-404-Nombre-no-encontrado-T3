@@ -19,10 +19,18 @@
 
             <form action="" method="post">
                 {% csrf_token %}
+
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Email" name="username" autofocus maxlength="254" required id="id_username"
+                    <input type="text" class="form-control" placeholder="Username" name="username" autofocus maxlength="254" required id="id_username"
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
+                {% if form.non_field_errors %}
+                    <ul class='form-errors'>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" placeholder="Contraseña" name="password" required id="id_password" />
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -49,7 +57,7 @@
             <br>
 
             <div>
-                <a href="#" class="btn btn-success btn-block btn-flat">Regístrate</a>
+                <a href="{% url 'signup' %}" class="btn btn-success btn-block btn-flat">Regístrate</a>
             </div>
 
         </div>
