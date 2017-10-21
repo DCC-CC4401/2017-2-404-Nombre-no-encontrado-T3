@@ -3,24 +3,32 @@ from django.db import models
 
 class Denuncia(models.Model):
 
+    ESTADO = (
+        (1, "Reportada"),
+        (2, "Consolidada"),
+        (3, "Verificada"),
+        (4, "Cerrada"),
+        (5, "Desechada"),
+    )
+
     MALTRATO = (
         (0, ""),
-        (1, "abanono en la calle"),
-        (2, "exposición a altas temperaturas"),
-        (3, "falta de agua"),
-        (4, "falta de comida"),
-        (5, "violencia"),
-        (6, "venta ambulante"),
+        (1, "Abanono en la calle"),
+        (2, "Exposición a altas temperaturas"),
+        (3, "Falta de agua"),
+        (4, "Falta de comida"),
+        (5, "Violencia"),
+        (6, "Venta ambulante"),
     )
 
     TIPOS = (
-        (1, "perro"),
-        (2, "gato"),
+        (1, "Perro"),
+        (2, "Gato"),
     )
 
     SEXO = (
-        (1, "macho"),
-        (2, "hembra"),
+        (1, "Macho"),
+        (2, "Hembra"),
     )
 
 
@@ -31,18 +39,41 @@ class Denuncia(models.Model):
     color = models.CharField(max_length=10)
     sexo = models.IntegerField(choices=SEXO)
     tipo = models.IntegerField(choices=TIPOS)
-    maltrato = models.IntegerField(choices=MALTRATO, default=0)
-    comentario = models.CharField(max_length=40)
+    maltrato = models.IntegerField(choices=MALTRATO)
+    comentario = models.CharField(max_length=40, blank=True)
 
 
 class Animal(models.Model):
 
+    TIPOS = (
+        ("Perro", "Perro"),
+        ("Gato", "Gato"),
+    )
+
+    SEXO = (
+        (1, "Macho"),
+        (2, "Hembra"),
+    )
+
+    EDAD = (
+        (0, "< 1 año"),
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 7),
+        (8, "> 7 años"),
+    )
+
     nombre = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=10)
-    foto = models.ImageField(upload_to='media', default="img/profile", blank=True)
-    sexo = models.CharField(max_length=10)
-    edad = models.IntegerField()
+    tipo = models.CharField(choices=TIPOS, max_length=10)
+    foto = models.FileField(upload_to='media', default="img/profile", blank=True)
+    sexo = models.IntegerField(choices=SEXO)
+    edad = models.IntegerField(choices=EDAD)
     tiempo = models.CharField(max_length=10)
 
-
+    def __str__(self):
+        return '%s %s' % (self.nombre, self.tipo)
 
