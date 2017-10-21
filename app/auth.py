@@ -1,10 +1,42 @@
-from django.conf.urls import url
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
+from django.db import transaction
 
-urlpatterns = [
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^admin/', admin.site.urls),
-]
+from app.forms import SignUpForm, SignUpFormMunicipalUser
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group, Permission, User
 
+municipalgroup = Group.objects.get_or_create(name='municipal')
+normalusergroup = Group.objects.get_or_create(name='usuario')
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            User.objects.get(username=username).groups.add(normalusergroup)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'registrate.html', {'form': form})
+
+
+def signupmunicipal(request):
+    if request.method == 'POST':
+        form = SignUpFormMunicipalUser(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            User.objects.get(username=username).groups.add(municipalgroup)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpFormMunicipalUser()
+    return render(request, 'registrarMunicipal.html', {'form': form})
