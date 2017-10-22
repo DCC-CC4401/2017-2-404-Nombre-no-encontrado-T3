@@ -203,5 +203,4 @@ fabric.properties
 
 *.iml
 
-*.sqlite3
 !/static/**
