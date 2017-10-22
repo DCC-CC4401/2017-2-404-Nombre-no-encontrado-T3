@@ -198,3 +198,11 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+*.xml
+
+*.iml
+
+*.iml
+
+*.sqlite3
