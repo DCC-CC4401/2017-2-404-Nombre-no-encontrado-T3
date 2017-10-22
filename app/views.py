@@ -1,24 +1,35 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from app.forms import *
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 
 
 def home(request):
-    return render(request,'usuario-in-adoptar.html')
+    return render(request, 'index.html')
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+
+def denuncia(request):
+    if request.POST:
+        form = DenunciaForm(request.POST)
+
+        tipo = request.POST.get('tipo')
+        sexo = request.POST.get('sexo')
+        color = request.POST.get('color')
+        herido = request.POST.get('herido')
+        maltrato = request.POST.get('maltrato')
+        calle = request.POST.get('calle')
+        comuna = request.POST.get('comuna')
+        comentario = request.POST.get('comentario')
+        estado = request.POST.get('estado')
+
+        denuncia_obj = Denuncia(tipo=tipo, sexo=sexo, color=color, herido=herido, maltrato=maltrato, calle=calle,
+                                comuna=comuna, comentario=comentario, estado=estado)
+        denuncia_obj.save()
+        messages.info(request, 'Tu denuncia ha sido realizada correctamente!')
+        return HttpResponseRedirect('/denuncias')
+
     else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
-
+        form = DenunciaForm()
+        return render(request, 'denuncia.html', {'form' : form})

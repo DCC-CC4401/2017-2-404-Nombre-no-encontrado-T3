@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-<title>Principal</title>
+<title>Haz tu denuncia</title>
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="{% url 'home' %}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CH</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -76,7 +76,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{% url 'denuncia' %}">
+                        <a href="#">
                             <i class="fa fa-bullhorn"></i>
                             <span>Denunciar</span>
                         </a>
@@ -94,19 +94,54 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+       <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Adoptar</h1>
+
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                
-                <div id="map" class="c-mapa"></div>
+                <div style="vertical-align: middle">
 
-            </section>
-            <!-- /.content -->
-        </div>
+                <head>
+                    <title>Haz tu denuncia</title>
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+                    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+                </head>
+                <body>
+                    <div class="page-header">
+                        <a href="{% url 'denuncia' %}" class="top-menu"></a>
+                        <h1>Haz tu denuncia!</h1>
+                    </div>
+                    <div class="content container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                {% if messages %}
+                                    <ul class="messages">
+                                    {% for message in messages %}
+                                    <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                <br>
+                                <form method="POST" class="post-form">
+                                    {% csrf_token %}
+
+                                    {{ form.as_p }}
+
+                                    <button type="submit" class="save btn btn-default">Enviar!</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
@@ -244,58 +279,5 @@
     <!-- AdminLTE App -->
     <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-    Both of these plugins are recommended to enhance the
-    user experience. -->
-
-    <script>
-        function myMap() {
-            var mapCanvas = document.getElementById("map");
-            var myCenter = new google.maps.LatLng(-33.457394,-70.664601);
-            var centerOne= new google.maps.LatLng(-33.453291,-70.667269);
-            var centerTwo = new google.maps.LatLng(-33.455908, -70.674335);
-            var centerThree = new google.maps.LatLng(-33.466617, -70.676903); 
-            var mapOptions = {center: myCenter, zoom: 15};
-            var map = new google.maps.Map(mapCanvas,mapOptions);
-            var myCity = new google.maps.Circle({
-                center: myCenter,
-                radius: 15,
-                strokeColor: "#0000FF",
-                strokeOpacity: 0.7,
-                strokeWeight: 2,
-                fillColor: "#0000FF",
-                fillOpacity: 0.4
-            });
-            var map = new google.maps.Map(mapCanvas,mapOptions);
-            myCity.setMap(map);
-            google.maps.event.addListener(map, 'click', function(event) {
-                placeMarker(map, event.latLng);
-            });
-            var infowindow = new google.maps.InfoWindow({
-                content:"ONG Favorita"
-            });
-            var markerOne = new google.maps.Marker({
-                position: centerOne,
-                icon: "favorito.png"
-            });
-            markerOne.setMap(map);
-            infowindow.open(map,markerOne);
-        }
-
-        function placeMarker(map, location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-            var infowindow = new google.maps.InfoWindow({
-                content: 'Nombre ONG'
-            });
-            infowindow.open(map,marker);
-        }
-    </script>
-    <!-- Mapa de google -->
-    <!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKrwK5Ra7Lrbam0i1ifeMrlPHnN1Tctpk&callback=myMap"></script>
-    -->
 
 {% endblock %}
