@@ -56,9 +56,6 @@
                                 <select class="form-control">
                                     <option>Perro</option>
                                     <option>Gato</option>
-                                    <option>Loro</option>
-                                    <option>Vaca</option>
-                                    <option>Caballo</option>
                                 </select>
                             </div>
                             <div class="checkbox">
@@ -101,8 +98,16 @@
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                
-                <div id="map" class="c-mapa"></div>
+
+                <div style="vertical-align: middle">
+
+                <img src="{% static 'img/mapaHome.png' %}" style="width: 100%;" usemap="#locationmap">
+
+                <map name="locationmap">
+
+                </map>
+
+            </div>
 
             </section>
             <!-- /.content -->
