@@ -5,7 +5,6 @@ from django.dispatch import receiver
 
 
 class Denuncia(models.Model):
-
     ESTADO = (
         ("RE", "Reportada"),
         ("CO", "Consolidada"),
@@ -56,7 +55,6 @@ class Denuncia(models.Model):
 
 
 class Animal(models.Model):
-
     TIPOS = (
         ("P", "Perro"),
         ("G", "Gato"),
@@ -93,6 +91,8 @@ class Animal(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_user = models.BooleanField(default=True)
+    is_municipal = models.BooleanField(default=False)
     photo = models.ImageField(upload_to="img/userprofile")
 
 
