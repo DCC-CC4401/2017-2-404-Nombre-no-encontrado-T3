@@ -28,7 +28,7 @@ def denuncia(request):
                                 comuna=comuna, comentario=comentario, estado=estado)
         denuncia_obj.save()
         messages.info(request, 'Tu denuncia ha sido realizada correctamente!')
-        return HttpResponseRedirect('/denuncias')
+        return HttpResponseRedirect('/denuncia/')
 
     else:
         form = DenunciaForm()
