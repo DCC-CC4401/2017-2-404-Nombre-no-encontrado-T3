@@ -1,12 +1,14 @@
-from django.db import transaction
-
 from app.forms import SignUpForm, SignUpFormMunicipalUser
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, Permission, User
 
-municipalgroup = Group.objects.get_or_create(name='municipal')
-normalusergroup = Group.objects.get_or_create(name='usuario')
+municipalgroup,created = Group.objects.get_or_create(name='municipal')
+normalusergroup,created = Group.objects.get_or_create(name='usuario')
+
+
+def registerbuttonpage(request):
+    return render(request, "registerbuttonpage.html")
 
 
 
@@ -36,7 +38,18 @@ def signupmunicipal(request):
             user = authenticate(username=username, password=raw_password)
             User.objects.get(username=username).groups.add(municipalgroup)
             login(request, user)
-            return redirect('home')
+            return redirect('homeMunicipalidad')
     else:
         form = SignUpFormMunicipalUser()
     return render(request, 'registrarMunicipal.html', {'form': form})
+
+
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    login(request, user)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

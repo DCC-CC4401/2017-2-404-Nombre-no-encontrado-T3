@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from app.forms import *
 from django.http import HttpResponseRedirect
@@ -12,8 +11,6 @@ def home(request):
 
 
 def denuncia(request):
-
-
     if request.POST:
         form = DenunciaForm(request.POST)
 

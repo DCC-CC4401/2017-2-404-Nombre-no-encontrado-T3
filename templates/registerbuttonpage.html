@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<title>Ingresar | Cholito</title>
+{% endblock %}
+
+{% block body %}
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <strong>Cholito</strong>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body"></div>
+            <div class="row">
+              <div class="col-xs-6">
+                 <b> <a href="{% url 'signup' %}" class="btn btn-primary btn-block btn-flat">Usuario</a></b>
+              </div>
+              <div class="col-xs-6">
+                  <b><a href="{% url 'signupmunicipal' %}" class="btn btn-success btn-block btn-flat">Representante Municipal</a></b>
+              </div>
+            </div>
+        </div>
+        <!-- /.login-box-body -->
+
+        <br>
+
+   </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery 3 -->
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+{% endblock %}
