@@ -1,5 +1,5 @@
 from app.forms import SignUpForm, SignUpFormMunicipalUser
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, Permission, User
 
@@ -41,3 +41,14 @@ def signupmunicipal(request):
     else:
         form = SignUpFormMunicipalUser()
     return render(request, 'registrarMunicipal.html', {'form': form})
+
+
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    login(request, user)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

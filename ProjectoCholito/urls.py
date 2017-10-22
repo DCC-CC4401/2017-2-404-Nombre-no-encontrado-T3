@@ -23,7 +23,7 @@ from app import views, auth, municipal
 urlpatterns = [
     url(r'^login/$', auth_views.login, name ='login'),
     url(r'^signup/$', auth.signup, name ='signup'),
-    url(r'^logout/$', auth_views.logout, name ='logout'),
+    url(r'^logout/$', auth.logout_view, name ='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^home/', views.home, name = 'home'),
     url(r'^signup2/', auth.signupmunicipal, name = 'signupmunicipal'),
