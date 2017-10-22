@@ -1,4 +1,5 @@
 from django import forms
+from .models import Denuncia
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -36,3 +37,42 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+
+class DenunciaForm(forms.Form):
+
+    MALTRATO = (
+        ("AB", "Abandono en la calle"),
+        ("EX", "Exposición a altas temperaturas"),
+        ("FA", "Falta de agua"),
+        ("FC", "Falta de comida"),
+        ("VI", "Violencia"),
+        ("VA", "Venta ambulante"),
+    )
+
+    TIPOS = (
+        ("P", "Perro"),
+        ("G", "Gato"),
+    )
+
+    SEXO = (
+        ("M", "Macho"),
+        ("H", "Hembra"),
+        ("D", "Desconocido"),
+    )
+
+    HERIDO = (
+        ("S", "Sí"),
+        ("N", "No"),
+        ("D", "Desconocido"),
+    )
+
+    tipo = forms.ChoiceField(choices=TIPOS)
+    sexo = forms.ChoiceField(choices=SEXO)
+    color = forms.CharField(max_length=10)
+    herido = forms.ChoiceField(choices=HERIDO)
+    maltrato = forms.ChoiceField(choices=MALTRATO)
+    calle = forms.CharField(max_length=50)
+    comuna = forms.CharField(max_length=20)
+    comentario = forms.CharField(max_length=40, required=False)
+    estado = forms.ChoiceField(choices= (("RE", "Reportada"),))
