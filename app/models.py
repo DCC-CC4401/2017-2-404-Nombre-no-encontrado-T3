@@ -1,4 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Denuncia(models.Model):
@@ -38,6 +41,7 @@ class Denuncia(models.Model):
     )
 
     estado = models.CharField(choices=ESTADO, max_length=15, default="RE")
+    estado = models.CharField(max_length=15)
     calle = models.CharField(max_length=50)
     comuna = models.CharField(max_length=20)
     herido = models.CharField(choices=HERIDO, max_length=15)
@@ -86,3 +90,18 @@ class Animal(models.Model):
     def __str__(self):
         return '%s %s' % (self.nombre, self.tipo)
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="img/userprofile")
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
