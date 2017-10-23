@@ -1,24 +1,30 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from app.forms import *
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from .models import Animal
 
 # Create your views here.
 
 
 def home(request):
-    return render(request,'usuario-in-adoptar.html')
+    return render(request, 'index.html')
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+
+def denuncia(request):
+    if request.POST:
+        form = DenunciaForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+            messages.info(request, 'Tu denuncia ha sido realizada correctamente!')
+            return HttpResponseRedirect('/denuncia/')
 
+    else:
+        form = DenunciaForm()
+        return render(request, 'denuncia.html', {'form' : form})
+
+
+def animales(request):
+    my_animals = Animal.objects.all()
+
+    return render(request, 'lista-animales.html', {'my_animals' : my_animals})

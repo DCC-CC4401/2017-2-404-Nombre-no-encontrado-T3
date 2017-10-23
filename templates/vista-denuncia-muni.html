@@ -114,138 +114,91 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    ONG
+                    Denuncia #{{ denuncia.id }}
                 </h1>
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Widget: user widget style 1 -->
-                        <div class="box box-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <!-- <div class="widget-user-header bg-black" style="background: url('dist/img/photo1.png') center center;"> -->
-                            <div class="widget-user-header bg-purple-active">
-                                <h3 class="widget-user-username">Fundación EDRA</h3>
-                                <h5 class="widget-user-desc">
-                                    <i class="fa fa-star c-star"></i>
-                                    182
-                                </h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="dist/img/ong-edra.png" alt="User Avatar">
-                            </div>
-                            <div class="c-box__footer">
-                                <a href="muni-estadisticas-ongs-ong.html" type="button" class="btn btn-primary">
-                                    <i class="fa fa-bar-chart"></i>
-                                    Ver Estadísticas
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Widget: user widget style 1 -->
-                        <div class="box box-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <!-- <div class="widget-user-header bg-black" style="background: url('dist/img/photo1.png') center center;"> -->
-                            <div class="widget-user-header bg-purple-active">
-                                <h3 class="widget-user-username">Fundación EDRA</h3>
-                                <h5 class="widget-user-desc">
-                                    <i class="fa fa-star c-star"></i>
-                                    182
-                                </h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="dist/img/ong-edra.png" alt="User Avatar">
-                            </div>
-                            <div class="c-box__footer">
-                                <a href="muni-estadisticas-ongs-ong.html" type="button" class="btn btn-primary">
-                                    <i class="fa fa-bar-chart"></i>
-                                    Ver Estadísticas
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Widget: user widget style 1 -->
-                        <div class="box box-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <!-- <div class="widget-user-header bg-black" style="background: url('dist/img/photo1.png') center center;"> -->
-                            <div class="widget-user-header bg-purple-active">
-                                <h3 class="widget-user-username">Fundación EDRA</h3>
-                                <h5 class="widget-user-desc">
-                                    <i class="fa fa-star c-star"></i>
-                                    182
-                                </h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="dist/img/ong-edra.png" alt="User Avatar">
-                            </div>
-                            <div class="c-box__footer">
-                                <a href="muni-estadisticas-ongs-ong.html" type="button" class="btn btn-primary">
-                                    <i class="fa fa-bar-chart"></i>
-                                    Ver Estadísticas
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Widget: user widget style 1 -->
-                        <div class="box box-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-purple-active">
-                                <h3 class="widget-user-username">Fundación EDRA</h3>
-                                <h5 class="widget-user-desc">
-                                    <i class="fa fa-star c-star"></i>
-                                    182
-                                </h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="dist/img/ong-edra.png" alt="User Avatar">
-                            </div>
-                            <div class="c-box__footer">
-                                <a href="muni-estadisticas-ongs-ong.html" type="button" class="btn btn-primary">
-                                    <i class="fa fa-bar-chart"></i>
-                                    Ver Estadísticas
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Widget: user widget style 1 -->
-                        <div class="box box-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-purple-active">
-                                <h3 class="widget-user-username">Fundación EDRA</h3>
-                                <h5 class="widget-user-desc">
-                                    <i class="fa fa-star c-star"></i>
-                                    182
-                                </h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="dist/img/ong-edra.png" alt="User Avatar">
-                            </div>
-                            <div class="c-box__footer">
-                                <a href="muni-estadisticas-ongs-ong.html" type="button" class="btn btn-primary">
-                                    <i class="fa fa-bar-chart"></i>
-                                    Ver Estadísticas
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /.widget-user -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
+                <div class="table-responsive">
+                    <table class="table table-condensed" style = "background-color: white">
+                        <tr>
+                            <th>Tipo de Denuncia:</th>
+                            {% if denuncia.maltrato == "AB" %}
+                                <td>Abandono en la calle</td>
+                            {% endif %}
+                            {% if denuncia.maltrato == "EX" %}
+                                <td>Exposición a altas temperaturas</td>
+                            {% endif %}
+                            {% if denuncia.maltrato == "FA" %}
+                                <td>Falta de agua</td>
+                            {% endif %}
+                            {% if denuncia.maltrato == "FC" %}
+                                <td>Falta de comida</td>
+                            {% endif %}
+                            {% if denuncia.maltrato == "VI" %}
+                                <td>Violencia</td>
+                            {% endif %}
+                            {% if denuncia.maltrato == "VA" %}
+                                <td>Venta ambulante</td>
+                            {% endif %}
+                            <th>Tipo de Animal:</th>
+                            {% if denuncia.tipo ==  "P"%}
+                                <td>Perro</td>
+                            {% endif %}
 
+                            {% if denuncia.tipo ==  "G"%}
+                                <td>Gato</td>
+                            {% endif %}
+                            <th>Color:</th>
+                            <td>{{ denuncia.color}}</td>
+                        </tr>
+                        <tr>
+                            <th>Dirección:</th>
+                            <td>{{ denuncia.calle }}</td>
+                            <th>Sexo:</th>
+
+                            {% if denuncia.sexo == "M" %}
+                                <td>Macho</td>
+                            {% endif %}
+                            {% if denuncia.sexo == "H" %}
+                                <td>Hembra</td>
+                            {% endif %}
+                            {% if denuncia.sexo == "D" %}
+                                <td>Desconocido</td>
+                            {% endif %}
+                            <th>¿Herido?</th>
+                            {% if denuncia.herido == "S" %}
+                                <td>Sí</td>
+                            {% endif %}
+                            {% if denuncia.herido == "N" %}
+                                <td>No</td>
+                            {% endif %}
+                            {% if denuncia.herido == "D" %}
+                                <td>Desconocido</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            {% if denuncia.estado == "RE" %}
+                                <td>Reportada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "CO" %}
+                                <td>Consolidada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "VE" %}
+                                <td>Verificada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "CE" %}
+                                <td>Cerrada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "DE" %}
+                                <td>Desechada</td>
+                            {% endif %}
+                            <th>Comentario:</th>
+                            <td>{{ denuncia.comentario }}</td>
+                        </tr>
+                    </table>
+                </div>
             </section>
             <!-- /.content -->
         </div>
