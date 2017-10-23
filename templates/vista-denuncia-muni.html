@@ -114,29 +114,89 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Denuncias
+                    Denuncia #{{ denuncia.id }}
                 </h1>
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
                 <div class="table-responsive">
-                    <table class="table table-hover"style = "background-color: white">
-                        <thead>
-                            <tr>
-                                {% for value in set_header %}
-                                    <th>{{ value }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for denuncia in set_denuncia %}
-                            <tr>
-                                {% for field in denuncia %}
-                                    <td>{{ field }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                        </tbody>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>Tipo de Denuncia:</th>
+                            {% if denuncia.maltrato == "AB" %}
+                            <th>Abandono en la calle</th>
+                            {% endif %}
+                            {% if denuncia.maltrato == "EX" %}
+                            <th>Exposición a altas temperaturas</th>
+                            {% endif %}
+                            {% if denuncia.maltrato == "FA" %}
+                            <th>Falta de agua</th>
+                            {% endif %}
+                            {% if denuncia.maltrato == "FC" %}
+                            <th>Falta de comida</th>
+                            {% endif %}
+                            {% if denuncia.maltrato == "VI" %}
+                            <th>Violencia</th>
+                            {% endif %}
+                            {% if denuncia.maltrato == "VA" %}
+                            <th>Venta ambulante</th>
+                            {% endif %}
+                            <th>Tipo de Animal:</th>
+                            {% if denuncia.tipo ==  "P"%}
+                                <th>Perro</th>
+                            {% endif %}
+
+                            {% if denuncia.tipo ==  "G"%}
+                                <th>Gato</th>
+                            {% endif %}
+                            <th>Color:</th>
+                            <th>{{ denuncia.color}}</th>
+                        </tr>
+                        <tr>
+                            <th>Dirección</th>
+                            <th>{{ denuncia.calle }}</th>
+                            <th>Sexo</th>
+
+                            {% if denuncia.sexo == "M" %}
+                                <th>Macho</th>
+                            {% endif %}
+                            {% if denuncia.sexo == "H" %}
+                                <th>Hembra</th>
+                            {% endif %}
+                            {% if denuncia.sexo == "D" %}
+                                <th>Desconocido</th>
+                            {% endif %}
+                            <th>¿Herido?</th>
+                            {% if denuncia.herido == "S" %}
+                                <th>Sí</th>
+                            {% endif %}
+                            {% if denuncia.herido == "N" %}
+                                <th>No</th>
+                            {% endif %}
+                            {% if denuncia.herido == "D" %}
+                                <th>Desconocido</th>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            {% if denuncia.estado == "RE" %}
+                                <th>Reportada</th>
+                            {% endif %}
+                            {% if denuncia.estado == "CO" %}
+                                <th>Consolidada</th>
+                            {% endif %}
+                            {% if denuncia.estado == "VE" %}
+                                <th>Verificada</th>
+                            {% endif %}
+                            {% if denuncia.estado == "CE" %}
+                                <th>Cerrada</th>
+                            {% endif %}
+                            {% if denuncia.estado == "DE" %}
+                                <th>Desechada</th>
+                            {% endif %}
+                            <th>Comentario:</th>
+                            <th>{{ denuncia.comentario }}</th>
+                        </tr>
                     </table>
                 </div>
             </section>

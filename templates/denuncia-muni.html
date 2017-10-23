@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-<title>Municipalidad | Cholito</title>
+<title>Haz tu denuncia</title>
 {% endblock %}
+
 {% block body %}
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="{% url 'home' %}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CH</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -24,34 +25,8 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- User Account Menu -->
-                        <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- The user image in the navbar-->
-                                <img src="dist/img/muni-santiago-160x160.png" class="user-image" alt="User Image">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">M. de Santiago</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- The user image in the menu -->
-                                <li class="user-header">
-                                    <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-                                    <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
-                                    <p>Municipalidad de Santiago</p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#myModal">
-                                            Perfil
-                                        </button>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="{% url 'logout' %}"  class="btn btn-default btn-flat">Salir</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="{% url 'login' %}">Ingresar</a>
                         </li>
                     </ul>
                 </div>
@@ -61,47 +36,56 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <!-- <br> -->
-                        <p>Municipalidad de<br>Santiago</p>
-                    </div>
-                </div>
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <!-- Optionally, you can add icons to the links -->
-                    <li>
-                        <a href= "{% url 'listaDenuncias'  %}">
-                            <i class="fa fa-bullhorn"></i>
-                            <span>Denuncias</span>
-                        </a>
-                    </li>
                     <li class="treeview active menu-open">
                         <a href="#">
-                            <i class="fa fa-bar-chart"></i>
-                            <span>Estadísticas</span>
+                            <i class="fa fa-search"></i>
+                            <span>Adoptar</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    Denuncias
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="muni-estadisticas-ongs.html">
-                                    <i class="fa fa-circle-o"></i>
-                                    ONG
-                                </a>
-                            </li>
+                        <ul class="treeview-menu c-filtro-adoptar">
+                            <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Tipo
+                                    </label>
+                                </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Perro</option>
+                                    <option>Gato</option>
+                                    <option>Loro</option>
+                                    <option>Vaca</option>
+                                    <option>Caballo</option>
+                                </select>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Edad
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>0-1</option>
+                                    <option>2-4</option>
+                                    <option>4-10</option>
+                                </select>
+                            </div>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-bullhorn"></i>
+                            <span>Denunciar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-star"></i>
+                            <span>ONG</span>
+                        </a>
                     </li>
                 </ul>
                 <!-- /.sidebar-menu -->
@@ -110,38 +94,39 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+       <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    Denuncias
-                </h1>
+
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                <div class="table-responsive">
-                    <table class="table table-hover"style = "background-color: white">
-                        <thead>
-                            <tr>
-                                {% for value in set_header %}
-                                    <th>{{ value }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for denuncia in set_denuncia %}
-                            <tr>
-                                {% for field in denuncia %}
-                                    <td>{{ field }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <!-- /.content -->
-        </div>
+                <div style="vertical-align: middle">
+
+                <head>
+                    <title>Haz tu denuncia</title>
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+                    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+                </head>
+                <body>
+                    <div class="page-header">
+                        <a href="{% url 'denuncia' %}" class="top-menu"></a>
+                        <h1>Haz tu denuncia!</h1>
+                    </div>
+                    <div class="content container">
+                        <div class="row">
+                            <div class="col-md-8">
+
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
@@ -152,9 +137,7 @@
             </div>
             <!-- Default to the left -->
             <strong>
-                Copyright &copy; 2017
-                <!-- <a href="#">Company</a>. -->
-                Cholito.
+                Copyright &copy; 2017 Cholito.
             </strong>
             All rights reserved.
         </footer>
@@ -256,7 +239,8 @@
                         <div class="form-group">
                             <label for="exampleInputFile">Imagen de perfil</label>
                             <br>
-                            <img src="dist/img/muni-santiago-160x160.png" class="user-image" alt="User Image" width="150">
+                            <img src="{% static "dist/img/user2-160x160.jpg" %}" class="user-image"
+                                 alt="User Image" width="150">
                             <br><br>
                             <input type="file" id="exampleInputFile">
                         </div>
@@ -274,13 +258,11 @@
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 3 -->
-    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="{%  static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <!-- AdminLTE App -->
-    <script src="{%  static 'dist/js/adminlte.min.js' %}"></script>
+    <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-    Both of these plugins are recommended to enhance the
-    user experience. -->
+
 {% endblock %}

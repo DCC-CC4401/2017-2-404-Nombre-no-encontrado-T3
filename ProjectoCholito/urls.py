@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^home/', views.home, name='home'),
     url(r'^denuncia/', views.denuncia, name='denuncia'),
     url(r'^signup2/', auth.signupmunicipal, name = 'signupmunicipal'),
+    url(r'^municipalidad/view/denuncia/(?P<id>\w{0,50})/$', municipal.viewDenuncia, name = 'viewDenuncia'),
     url(r'^municipalidad/denuncias/', municipal.listaDenuncias, name = 'listaDenuncias'),
     url(r'^municipalidad/', municipal.homeMunicipalidad, name = 'homeMunicipalidad'),
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
