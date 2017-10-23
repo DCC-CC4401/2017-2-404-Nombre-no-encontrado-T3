@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from app.forms import *
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -19,6 +19,5 @@ def denuncia(request):
             return HttpResponseRedirect('/denuncia/')
 
     else:
-        #Denuncia.objects.all().delete()
         form = DenunciaForm()
         return render(request, 'denuncia.html', {'form' : form})

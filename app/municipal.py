@@ -2,14 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from app.decorators import group_required
-from app.functions import parseDenunciaSet
 from app.models import Denuncia
 
 
 @login_required()
 @group_required('municipal')
 def homeMunicipalidad(request):
-    print("asdasd")
     return render(request, 'muni-estadisticas-ongs.html')
 
 
@@ -18,7 +16,6 @@ def homeMunicipalidad(request):
 def listaDenuncias(request):
     username = request.user.get_username()
     set_denuncia = Denuncia.objects.all().filter(comuna__username=username)
-    #denunciasProcesadas = parseDenunciaSet(set_denuncia)
     set_header = ["Tipo de Denuncia", "Animal", "Dirección", "Herido"]
 
     return render(request, 'muni-lista-denuncias.html', context={'set_denuncia': set_denuncia,
@@ -28,6 +25,5 @@ def listaDenuncias(request):
 @login_required()
 @group_required('municipal')
 def viewDenuncia(request, id):
-    print("caca")
     den = Denuncia.objects.all().get(id=id)
     return render(request, 'vista-denuncia-muni.html', context={'denuncia': den})

@@ -36,16 +36,14 @@ def signupmunicipal(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            new_val = {'is_municipal': True}
+
             users.get(username=username).groups.add(municipalgroup)
             prof = users.get(username=username).profile
             prof.is_municipal = True
             prof.save()
 
-            print(users.get(username=username).profile)
-            #Profile.objects.update_or_create(users.get(username=username).profile,new_val)
-            #users.update_or_create(username=username, defaults=new_val)
             login(request, user)
+
             return redirect('homeMunicipalidad')
     else:
         form = SignUpFormMunicipalUser()
@@ -58,7 +56,7 @@ def login_view(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         login(request, user)
-        print(users.get(username=username).profile.is_municipal)
+
         if users.get(username=username).profile.is_municipal:
             return redirect('homeMunicipalidad')
         else:
