@@ -62,7 +62,7 @@ def login_view(request):
         if users.get(username=username).profile.is_municipal:
             return redirect('homeMunicipalidad')
         else:
-            return redirect('home')
+            return redirect('homeUsuario') #aqui iba 'home'
     return render(request,'registration/login.html')
 
 
