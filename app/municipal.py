@@ -18,10 +18,10 @@ def homeMunicipalidad(request):
 def listaDenuncias(request):
     username = request.user.get_username()
     set_denuncia = Denuncia.objects.all().filter(comuna__username=username)
-    denunciasProcesadas = parseDenunciaSet(set_denuncia)
+    #denunciasProcesadas = parseDenunciaSet(set_denuncia)
     set_header = ["Tipo de Denuncia", "Animal", "Dirección", "Herido"]
 
-    return render(request, 'muni-lista-denuncias.html', context={'set_denuncia': denunciasProcesadas,
+    return render(request, 'muni-lista-denuncias.html', context={'set_denuncia': set_denuncia,
                                                                  'set_header': set_header})
 
 

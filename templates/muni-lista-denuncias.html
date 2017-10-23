@@ -130,11 +130,52 @@
                         </thead>
                         <tbody>
                         {% for denuncia in set_denuncia %}
-                            <tr>
-                                {% for field in denuncia %}
-                                    <td>{{ field }}</td>
-                                {% endfor %}
+
+                            <tr onclick="document.location = '{% url 'viewDenuncia' id=denuncia.id  %}';">
+
+                                <!--<th>Tipo de Denuncia</th>-->
+                                {% if denuncia.maltrato == "AB" %}
+                                <td>Abandono en la calle</td>
+                                {% endif %}
+                                {% if denuncia.maltrato == "EX" %}
+                                <td>Exposición a altas temperaturas</td>
+                                {% endif %}
+                                {% if denuncia.maltrato == "FA" %}
+                                <td>Falta de agua</td>
+                                {% endif %}
+                                {% if denuncia.maltrato == "FC" %}
+                                <td>Falta de comida</td>
+                                {% endif %}
+                                {% if denuncia.maltrato == "VI" %}
+                                <td>Violencia</td>
+                                {% endif %}
+                                {% if denuncia.maltrato == "VA" %}
+                                <td>Venta ambulante</td>
+                                {% endif %}
+                                <!--<th>Tipo de Animal:</th>-->
+                                {% if denuncia.tipo ==  "P"%}
+                                    <td>Perro</td>
+                                {% endif %}
+
+                                {% if denuncia.tipo ==  "G"%}
+                                    <td>Gato</td>
+                                {% endif %}
+
+                                <!--<th>Dirección</th>-->
+                                <td>{{ denuncia.calle }}</td>
+                                <!--<th>¿Herido?</th>-->
+                                {% if denuncia.herido == "S" %}
+                                    <td>Sí</td>
+                                {% endif %}
+                                {% if denuncia.herido == "N" %}
+                                    <td>No</td>
+                                {% endif %}
+                                {% if denuncia.herido == "D" %}
+                                    <td>Desconocido</td>
+                                {% endif %}
+
                             </tr>
+
                         {% endfor %}
                         </tbody>
                     </table>
