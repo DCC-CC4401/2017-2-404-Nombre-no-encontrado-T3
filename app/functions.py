@@ -13,13 +13,13 @@ def getComunas():
 
 
 def parseDenuncia(den):
-    ESTADO = {
-        "RE": "Reportada",
-        "CO": "Consolidada",
-        "VE": "Verificada",
-        "CE": "Cerrada",
-        "DE": "Desechada",
-    }
+    #ESTADO = {
+    #    "RE": "Reportada",
+    #    "CO": "Consolidada",
+    #    "VE": "Verificada",
+    #    "CE": "Cerrada",
+    #    "DE": "Desechada",
+    #}
 
     MALTRATO = {
         "AB": "Abandono en la calle",
@@ -35,11 +35,11 @@ def parseDenuncia(den):
         "G": "Gato",
     }
 
-    SEXO = {
-        "M": "Macho",
-        "H": "Hembra",
-        "D": "Desconocido",
-    }
+   # SEXO = {
+   #     "M": "Macho",
+   #     "H": "Hembra",
+   #     "D": "Desconocido",
+   # }
 
     HERIDO = {
         "S": "Sí",
@@ -48,8 +48,6 @@ def parseDenuncia(den):
     }
 
     return (MALTRATO[den.maltrato],
-            SEXO[den.sexo],
-            ESTADO[den.estado],
             TIPOS[den.tipo],
             den.calle,
             HERIDO[den.herido])

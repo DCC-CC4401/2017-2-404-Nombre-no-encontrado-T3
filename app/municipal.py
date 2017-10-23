@@ -17,7 +17,7 @@ def listaDenuncias(request):
     username = request.user.get_username()
     set_denuncia = Denuncia.objects.all().filter(comuna__username=username)
     denunciasProcesadas = parseDenunciaSet(set_denuncia)
-    set_header = ["Maltrato","Sexo","Estado","Animal","Dirección","Herido"]
+    set_header = ["Tipo de Denuncia","Animal","Dirección","Herido"]
 
     return render(request,'muni-lista-denuncias.html',context={'set_denuncia': denunciasProcesadas,
                                                                'set_header': set_header})

@@ -131,8 +131,8 @@
                         <tbody>
                         {% for denuncia in set_denuncia %}
                             <tr>
-                                {% for field,value in denuncia.items %}
-                                    <td>{{ value }}</td>
+                                {% for field in denuncia%}
+                                    <td>{{ field }}</td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
