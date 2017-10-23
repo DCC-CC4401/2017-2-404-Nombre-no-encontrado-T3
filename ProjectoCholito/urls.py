@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^municipalidad/denuncias/', municipal.listaDenuncias, name = 'listaDenuncias'),
     url(r'^municipalidad/', municipal.homeMunicipalidad, name = 'homeMunicipalidad'),
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
+    url(r'^animales/', views.animales, name='animales'),
     url(r'$', views.home, name='home'),
 
 ]

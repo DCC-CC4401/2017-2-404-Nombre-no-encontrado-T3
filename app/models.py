@@ -71,33 +71,33 @@ class Denuncia(models.Model):
 
 class Animal(models.Model):
     TIPOS = (
-        ("P", "Perro"),
-        ("G", "Gato"),
+        ("Perro", "Perro"),
+        ("Gato", "Gato"),
     )
 
     SEXO = (
-        ("M", "Macho"),
-        ("H", "Hembra"),
+        ("Macho", "Macho"),
+        ("Hembra", "Hembra"),
         ("D", "Desconocido"),
     )
 
     EDAD = (
-        (0, "< 1 año"),
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 6),
-        (7, 7),
-        (8, "> 7 años"),
+        ("< 1 año", "< 1 año"),
+        ("1", 1),
+        ("2", 2),
+        ("3", 3),
+        ("4", 4),
+        ("5", 5),
+        ("6", 6),
+        ("7", 7),
+        ("> 7 años", "> 7 años"),
     )
 
     nombre = models.CharField(max_length=20)
     tipo = models.CharField(choices=TIPOS, max_length=10)
-    foto = models.FileField(upload_to='media', default="img/profile", blank=True)
+    foto = models.FileField(upload_to='img/', default="img/profile.png", blank=True)
     sexo = models.CharField(choices=SEXO, max_length=10)
-    edad = models.CharField(choices=EDAD, max_length=10)
+    edad = models.CharField(choices=EDAD, max_length=15)
     tiempo = models.CharField(max_length=10)
 
     def __str__(self):
