@@ -1,8 +1,9 @@
 from django import forms
-from .models import Denuncia
-from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from app.functions import getComunas
+from .models import Denuncia
 
 
 class SignUpForm(UserCreationForm):
@@ -34,9 +35,11 @@ class SignUpForm(UserCreationForm):
         strip=False,
         help_text="Ingrese la misma contraseña para validar",
     )
+
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
+
 
 class SignUpFormMunicipalUser(UserCreationForm):
     first_name = forms.CharField(
@@ -73,10 +76,7 @@ class SignUpFormMunicipalUser(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
-
-
-class DenunciaForm(forms.Form):
-
+class DenunciaForm(forms.ModelForm):
     MALTRATO = (
         ("AB", "Abandono en la calle"),
         ("EX", "Exposición a altas temperaturas"),
@@ -109,6 +109,14 @@ class DenunciaForm(forms.Form):
     herido = forms.ChoiceField(choices=HERIDO)
     maltrato = forms.ChoiceField(choices=MALTRATO)
     calle = forms.CharField(max_length=50)
-    comuna = forms.CharField(max_length=20)
+    comuna = forms.ChoiceField(choices=getComunas())
     comentario = forms.CharField(max_length=40, required=False)
-    estado = forms.ChoiceField(choices= (("RE", "Reportada"),))
+    estado = forms.ChoiceField(choices=(("RE", "Reportada"),))
+
+    def clean_comuna(self):
+        comuna_name = self.cleaned_data['comuna']
+        comuna = User.objects.all().get(username=comuna_name)
+        return comuna
+    class Meta:
+        model = Denuncia
+        fields = ('tipo', 'sexo', 'color', 'herido', 'maltrato', 'calle', 'comuna', 'comentario', 'estado')

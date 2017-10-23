@@ -16,7 +16,6 @@ Including another URLconf
 
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 
 from app import views, auth, municipal
 
@@ -28,6 +27,7 @@ urlpatterns = [
     url(r'^home/', views.home, name='home'),
     url(r'^denuncia/', views.denuncia, name='denuncia'),
     url(r'^signup2/', auth.signupmunicipal, name = 'signupmunicipal'),
+    url(r'^municipalidad/denuncias/', municipal.listaDenuncias, name = 'listaDenuncias'),
     url(r'^municipalidad/', municipal.homeMunicipalidad, name = 'homeMunicipalidad'),
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
     url(r'$', views.home, name='home'),
