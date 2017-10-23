@@ -22,7 +22,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             User.objects.get(username=username).groups.add(normalusergroup)
             login(request, user)
-            return redirect('home')
+            return redirect('homeUsuario')
     else:
         form = SignUpForm()
     return render(request, 'registrate.html', {'form': form})
