@@ -29,16 +29,16 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="dist/img/muni-santiago-160x160.png" class="user-image" alt="User Image">
+                                <img src="{% static 'img/santiagologo.jpg' %}"class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">M. de Santiago</span>
+                                <span class="hidden-xs">M. de {{ user.first_name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-                                    <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
-                                    <p>Municipalidad de Santiago</p>
+                                    <img src="{% static 'img/santiagologo.jpg' %}" class="img-circle" alt="User Image">
+                                    <p>Municipalidad de {{ user.first_name }}</p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
@@ -64,11 +64,11 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
+                        <img src="{% static 'img/santiagologo.jpg' %}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <!-- <br> -->
-                        <p>Municipalidad de<br>Santiago</p>
+                        <p>Municipalidad de<br>{{ user.first_name }}</p>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -108,7 +108,6 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -198,6 +197,24 @@
                             <td>{{ denuncia.comentario }}</td>
                         </tr>
                     </table>
+                    <div class ="row">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-8">
+                        <img src="{% static 'img/mapaHome.png' %}" style="width: 100%;" usemap="#locationmap">
+
+                            <map name="locationmap">
+
+                            </map>
+                        </div>
+
+                    </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6">
+                                <a href="{% url 'modifyDenuncia' id=denuncia.id %}" class="btn btn-primary btn-block btn-flat">Modificar</a>
+                            </div>
+                        </div>
                 </div>
             </section>
             <!-- /.content -->
