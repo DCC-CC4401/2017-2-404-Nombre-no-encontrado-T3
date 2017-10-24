@@ -1,20 +1,14 @@
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render, redirect
 
 from app.decorators import group_required
 from app.forms import DenunciaForm, ModifyDenunciaForm
 from app.models import Denuncia
-=======
-from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
 
-from app.decorators import group_required
-from app.functions import parseDenunciaSet
 from app.models import Denuncia, User
->>>>>>> origin/feature/estadisticas
+
 
 
 @login_required()
@@ -40,7 +34,7 @@ def viewDenuncia(request, id):
     return render(request, 'vista-denuncia-muni.html', context={'denuncia': den})
 
 
-<<<<<<< HEAD
+
 @login_required()
 @group_required('municipal')
 def modifyDenuncia(request, id):
@@ -51,9 +45,7 @@ def modifyDenuncia(request, id):
         form.save()
         return render(request, 'vista-denuncia-muni.html', context={'denuncia': den})
     return render(request, 'modifyDenuncia.html', {'form': form})
-=======
-    return render(request,'muni-lista-denuncias.html',context={'set_denuncia': denunciasProcesadas,
-                                                               'set_header': set_header})
+
 
 @login_required()
 @group_required('municipal')
@@ -85,4 +77,4 @@ def estadisticas(request):
     }
 
     return HttpResponse(template.render(context, request))
->>>>>>> origin/feature/estadisticas
+

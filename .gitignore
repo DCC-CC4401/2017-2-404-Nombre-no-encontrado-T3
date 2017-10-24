@@ -206,3 +206,5 @@ fabric.properties
 !/static/**
 
 db.sqlite3
+
+*.sqlite3
