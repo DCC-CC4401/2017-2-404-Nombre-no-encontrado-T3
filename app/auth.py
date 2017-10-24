@@ -23,6 +23,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            user.set_password(raw_password)
             User.objects.get(username=username).groups.add(normalusergroup)
             login(request, user)
             return redirect('homeUsuario')
