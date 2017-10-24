@@ -76,7 +76,12 @@ class SignUpFormMunicipalUser(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
-class DenunciaForm(forms.ModelForm): #Formulario denuncia
+class DenunciaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(DenunciaForm, self).__init__(*args, **kwargs)
+        self.fields['comuna'] = forms.ChoiceField(
+            choices=getComunas())
+
     MALTRATO = (
         ("AB", "Abandono en la calle"),
         ("EX", "Exposición a altas temperaturas"),
@@ -109,9 +114,61 @@ class DenunciaForm(forms.ModelForm): #Formulario denuncia
     herido = forms.ChoiceField(choices=HERIDO)
     maltrato = forms.ChoiceField(choices=MALTRATO)
     calle = forms.CharField(max_length=50)
-    comuna = forms.ChoiceField(choices=getComunas()) #comuna
     comentario = forms.CharField(max_length=40, required=False)
     estado = forms.ChoiceField(choices=(("RE", "Reportada"),))
+
+    def clean_comuna(self):
+        comuna_name = self.cleaned_data['comuna']
+        comuna = User.objects.all().get(username=comuna_name)
+        print("cleaned")
+        return comuna
+    class Meta:
+        model = Denuncia
+        fields = ('tipo', 'sexo', 'color', 'herido', 'maltrato', 'calle', 'comuna', 'comentario', 'estado')
+
+
+class ModifyDenunciaForm(forms.ModelForm):
+    MALTRATO = (
+        ("AB", "Abandono en la calle"),
+        ("EX", "Exposición a altas temperaturas"),
+        ("FA", "Falta de agua"),
+        ("FC", "Falta de comida"),
+        ("VI", "Violencia"),
+        ("VA", "Venta ambulante"),
+    )
+
+    TIPOS = (
+        ("P", "Perro"),
+        ("G", "Gato"),
+    )
+
+    SEXO = (
+        ("M", "Macho"),
+        ("H", "Hembra"),
+        ("D", "Desconocido"),
+    )
+
+    HERIDO = (
+        ("S", "Sí"),
+        ("N", "No"),
+        ("D", "Desconocido"),
+    )
+    ESTADO = (
+        ("RE", "Reportada"),
+        ("CO", "Consolidada"),
+        ("VE", "Verificada"),
+        ("CE", "Cerrada"),
+        ("DE", "Desechada"),
+    )
+    tipo = forms.ChoiceField(choices=TIPOS)
+    sexo = forms.ChoiceField(choices=SEXO)
+    color = forms.CharField(max_length=10)
+    herido = forms.ChoiceField(choices=HERIDO)
+    maltrato = forms.ChoiceField(choices=MALTRATO)
+    calle = forms.CharField(max_length=50)
+    comuna = forms.ChoiceField(choices=getComunas())
+    comentario = forms.CharField(max_length=40, required=False)
+    estado = forms.ChoiceField(choices=ESTADO)
 
     def clean_comuna(self):
         comuna_name = self.cleaned_data['comuna']

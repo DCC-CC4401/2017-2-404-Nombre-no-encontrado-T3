@@ -108,77 +108,113 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Denuncias
+                    Denuncia #{{ denuncia.id }}
                 </h1>
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
                 <div class="table-responsive">
-                    <table class="table table-hover"style = "background-color: white">
-                        <thead>
-                            <tr>
-                                {% for value in set_header %}
-                                    <th>{{ value }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for denuncia in set_denuncia %}
-
-                            <tr onclick="document.location = '{% url 'viewDenuncia' id=denuncia.id  %}';">
-
-                                <!--<th>Tipo de Denuncia</th>-->
-                                {% if denuncia.maltrato == "AB" %}
+                    <table class="table table-condensed" style = "background-color: white">
+                        <tr>
+                            <th>Tipo de Denuncia:</th>
+                            {% if denuncia.maltrato == "AB" %}
                                 <td>Abandono en la calle</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "EX" %}
+                            {% endif %}
+                            {% if denuncia.maltrato == "EX" %}
                                 <td>Exposición a altas temperaturas</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "FA" %}
+                            {% endif %}
+                            {% if denuncia.maltrato == "FA" %}
                                 <td>Falta de agua</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "FC" %}
+                            {% endif %}
+                            {% if denuncia.maltrato == "FC" %}
                                 <td>Falta de comida</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "VI" %}
+                            {% endif %}
+                            {% if denuncia.maltrato == "VI" %}
                                 <td>Violencia</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "VA" %}
+                            {% endif %}
+                            {% if denuncia.maltrato == "VA" %}
                                 <td>Venta ambulante</td>
-                                {% endif %}
-                                <!--<th>Tipo de Animal:</th>-->
-                                {% if denuncia.tipo ==  "P"%}
-                                    <td>Perro</td>
-                                {% endif %}
+                            {% endif %}
+                            <th>Tipo de Animal:</th>
+                            {% if denuncia.tipo ==  "P"%}
+                                <td>Perro</td>
+                            {% endif %}
 
-                                {% if denuncia.tipo ==  "G"%}
-                                    <td>Gato</td>
-                                {% endif %}
+                            {% if denuncia.tipo ==  "G"%}
+                                <td>Gato</td>
+                            {% endif %}
+                            <th>Color:</th>
+                            <td>{{ denuncia.color}}</td>
+                        </tr>
+                        <tr>
+                            <th>Dirección:</th>
+                            <td>{{ denuncia.calle }}</td>
+                            <th>Sexo:</th>
 
-                                <!--<th>Dirección</th>-->
-                                <td>{{ denuncia.calle }}</td>
-                                <!--<th>¿Herido?</th>-->
-                                {% if denuncia.herido == "S" %}
-                                    <td>Sí</td>
-                                {% endif %}
-                                {% if denuncia.herido == "N" %}
-                                    <td>No</td>
-                                {% endif %}
-                                {% if denuncia.herido == "D" %}
-                                    <td>Desconocido</td>
-                                {% endif %}
-
-                            </tr>
-
-                        {% endfor %}
-                        </tbody>
+                            {% if denuncia.sexo == "M" %}
+                                <td>Macho</td>
+                            {% endif %}
+                            {% if denuncia.sexo == "H" %}
+                                <td>Hembra</td>
+                            {% endif %}
+                            {% if denuncia.sexo == "D" %}
+                                <td>Desconocido</td>
+                            {% endif %}
+                            <th>¿Herido?</th>
+                            {% if denuncia.herido == "S" %}
+                                <td>Sí</td>
+                            {% endif %}
+                            {% if denuncia.herido == "N" %}
+                                <td>No</td>
+                            {% endif %}
+                            {% if denuncia.herido == "D" %}
+                                <td>Desconocido</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            {% if denuncia.estado == "RE" %}
+                                <td>Reportada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "CO" %}
+                                <td>Consolidada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "VE" %}
+                                <td>Verificada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "CE" %}
+                                <td>Cerrada</td>
+                            {% endif %}
+                            {% if denuncia.estado == "DE" %}
+                                <td>Desechada</td>
+                            {% endif %}
+                            <th>Comentario:</th>
+                            <td>{{ denuncia.comentario }}</td>
+                        </tr>
                     </table>
+                    <div class ="row">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-8">
+                        <img src="{% static 'img/mapaHome.png' %}" style="width: 100%;" usemap="#locationmap">
+
+                            <map name="locationmap">
+
+                            </map>
+                        </div>
+
+                    </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6">
+                                <a href="{% url 'modifyDenuncia' id=denuncia.id %}" class="btn btn-primary btn-block btn-flat">Modificar</a>
+                            </div>
+                        </div>
                 </div>
             </section>
             <!-- /.content -->

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from app.forms import * #import
+from django.shortcuts import render
+from app.forms import *
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from .models import Animal
 
 # Create your views here.
 
@@ -19,6 +20,11 @@ def denuncia(request):
             return HttpResponseRedirect('/denuncia/')
 
     else:
-        #Denuncia.objects.all().delete()
         form = DenunciaForm()
         return render(request, 'denuncia.html', {'form' : form})
+
+
+def animales(request):
+    my_animals = Animal.objects.all()
+
+    return render(request, 'lista-animales.html', {'my_animals' : my_animals})
