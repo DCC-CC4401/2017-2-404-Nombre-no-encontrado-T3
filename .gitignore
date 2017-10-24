@@ -204,3 +204,7 @@ fabric.properties
 *.iml
 
 !/static/**
+
+db.sqlite3
+
+*.sqlite3

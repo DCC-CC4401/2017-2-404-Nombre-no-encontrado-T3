@@ -1,10 +1,14 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render, redirect
 
 from app.decorators import group_required
 from app.forms import DenunciaForm, ModifyDenunciaForm
 from app.models import Denuncia
+from django.template import loader
+
+from app.models import Denuncia, User
+
 
 
 @login_required()
@@ -30,6 +34,7 @@ def viewDenuncia(request, id):
     return render(request, 'vista-denuncia-muni.html', context={'denuncia': den})
 
 
+
 @login_required()
 @group_required('municipal')
 def modifyDenuncia(request, id):
@@ -40,3 +45,36 @@ def modifyDenuncia(request, id):
         form.save()
         return render(request, 'vista-denuncia-muni.html', context={'denuncia': den})
     return render(request, 'modifyDenuncia.html', {'form': form})
+
+
+@login_required()
+@group_required('municipal')
+def estadisticas(request):
+
+    username = request.user.get_username()
+    reportadas = Denuncia.objects.all().filter(comuna__username=username, estado="RE").count()
+    consolidadas = Denuncia.objects.all().filter(comuna__username=username, estado="CO").count()
+    verificadas = Denuncia.objects.all().filter(comuna__username=username, estado="VE").count()
+    cerradas = Denuncia.objects.all().filter(comuna__username=username, estado="CE").count()
+    desechadas = Denuncia.objects.all().filter(comuna__username=username, estado="DE").count()
+    denuncias = reportadas + consolidadas + verificadas + desechadas
+    numComunas = 10 #dummy
+    numTotal = 100 #dummy
+    #denunciasProcesadas = parseDenunciaSet(set_denuncia)
+
+    template = loader.get_template('muni-estadisticas-ongs-ong.html')
+
+    context = {
+        'numComunas': numComunas,
+        'numTotal': numTotal,
+        'username': username,
+        'reportadas': reportadas,
+        'consolidadas': consolidadas,
+        'verificadas': verificadas,
+        'cerradas': cerradas,
+        'desechadas': desechadas,
+        'totalDen': denuncias
+    }
+
+    return HttpResponse(template.render(context, request))
+

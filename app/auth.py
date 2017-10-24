@@ -23,9 +23,10 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            user.set_password(raw_password)
             User.objects.get(username=username).groups.add(normalusergroup)
             login(request, user)
-            return redirect('home')
+            return redirect('homeUsuario')
     else:
         form = SignUpForm()
     return render(request, 'registrate.html', {'form': form})
@@ -63,7 +64,7 @@ def login_view(request):
         if users.get(username=username).profile.is_municipal:
             return redirect('homeMunicipalidad')
         else:
-            return redirect('home')
+            return redirect('homeUsuario') #aqui iba 'home'
     return render(request,'registration/login.html')
 
 
