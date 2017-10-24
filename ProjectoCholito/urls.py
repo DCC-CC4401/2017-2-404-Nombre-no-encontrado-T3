@@ -29,12 +29,12 @@ urlpatterns = [
     url(r'^signup2/', auth.signupmunicipal, name = 'signupmunicipal'),
     url(r'^municipalidad/denuncia/modify/(?P<id>\w{0,50})/$', municipal.modifyDenuncia, name = 'modifyDenuncia'),
     url(r'^municipalidad/denuncia/view/(?P<id>\w{0,50})/$', municipal.viewDenuncia, name = 'viewDenuncia'),
+    url(r'^municipalidad/estadisticas/', municipal.estadisticas, name='estadisticas'),
     url(r'^municipalidad/denuncias/', municipal.listaDenuncias, name = 'listaDenuncias'),
     url(r'^municipalidad/', municipal.homeMunicipalidad, name = 'homeMunicipalidad'),
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
     url(r'^usuario/', usuario.homeUsuario, name = 'homeUsuario'), #esta linea fue agregada
     url(r'^animales/', views.animales, name='animales'),
-    url(r'^estadisticas/', municipal.estadisticas, name='estadisticas'),
     url(r'$', views.home, name='home'),
 
 ]
