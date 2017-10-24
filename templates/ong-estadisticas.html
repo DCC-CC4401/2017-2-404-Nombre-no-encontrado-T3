@@ -1,47 +1,15 @@
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<title>Ficha Animal</title>
+{% endblock %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ONG | Cholito</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="dist/css/skins/all-skins.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-    <link rel="stylesheet" href="dist/css/general.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-
+{% block body %}
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="{% url 'home' %}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CH</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -96,6 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
+                        <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
                         <img src="dist/img/ong-edra.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
@@ -109,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="treeview">
+                    <li class="treeview active menu-open">
                         <a href="#">
                             <i class="fa fa-heart"></i>
                             <span>Adopción</span>
@@ -124,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Buscan hogar
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="lista-animales.html">
                                     <i class="fa fa-circle-o"></i>
                                     Adoptados
@@ -132,8 +101,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
-                        <a href="#">
+                    <li>
+                        <a href="ong-estadisticas.html">
                             <i class="fa fa-bar-chart"></i>
                             <span>Estadísticas</span>
                         </a>
@@ -146,61 +115,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    Estadísticas
-                </h1>
-            </section>
+
             <!-- Main content -->
             <section class="content container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <!-- Bar chart -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <i class="fa fa-bar-chart-o"></i>
+                <div style="vertical-align: middle">
 
-                                <h3 class="box-title">Adopción</h3>
+                    <head>
+                    <title>FC-python wrapper</title>
+                    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+                    <script type="text/javascript" src="{% static "fusioncharts/themes/fusioncharts.theme.fint.js" %}"></script>
+                    </head>
+                    <body>
+                    <h1>Test</h1>
+                        <div id="chart-1">{{ output|safe }}</div>
+                    </body>
 
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div id="bar-chart-1" class="c-bar-chart"></div>
-                            </div>
-                            <!-- /.box-body-->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-6">
-                        <!-- Bar chart -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <i class="fa fa-bar-chart-o"></i>
-
-                                <h3 class="box-title">Esterilización</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div id="bar-chart-2" class="c-bar-chart"></div>
-                            </div>
-                            <!-- /.box-body-->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                    <!-- /.col -->
                 </div>
-
             </section>
             <!-- /.content -->
         </div>
@@ -334,90 +264,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 3 -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- FLOT CHARTS -->
-    <script src="bower_components/Flot/jquery.flot.js"></script>
-    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-    <script src="bower_components/Flot/jquery.flot.resize.js"></script>
-    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-    <script src="bower_components/Flot/jquery.flot.pie.js"></script>
-    <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
-    <script src="bower_components/Flot/jquery.flot.categories.js"></script>
+    <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 
-    <!-- Page script -->
-    <script>
-        $(function () {
-            /*
-            * BAR CHART
-            * ---------
-            */
-            var bar_data = {
-                data : [['Abril', 10], ['Mayo', 8], ['Junio', 4], ['Julio', 13], ['Agosto', 17], ['Septiembre', 2]],
-                color: '#3c8dbc'
-            }
-            $.plot('#bar-chart-1', [bar_data], {
-                grid  : {
-                    borderWidth: 1,
-                    borderColor: '#f3f3f3',
-                    tickColor  : '#f3f3f3'
-                },
-                series: {
-                bars: {
-                    show    : true,
-                    barWidth: 0.5,
-                    align   : 'center'
-                }
-                },
-                xaxis : {
-                    mode      : 'categories',
-                    tickLength: 0
-                }
-            })
-            var bar_data = {
-                data : [['Abril', 16], ['Mayo', 5], ['Junio', 11], ['Julio', 16], ['Agosto', 8], ['Septiembre', 1]],
-                color: '#3c8dbc'
-            }
-            $.plot('#bar-chart-2', [bar_data], {
-                grid  : {
-                    borderWidth: 1,
-                    borderColor: '#f3f3f3',
-                    tickColor  : '#f3f3f3'
-                },
-                series: {
-                bars: {
-                    show    : true,
-                    barWidth: 0.5,
-                    align   : 'center'
-                }
-                },
-                xaxis : {
-                    mode      : 'categories',
-                    tickLength: 0
-                }
-            })
-        /* END BAR CHART */
-
-        })
-
-        /*
-        * Custom Label formatter
-        * ----------------------
-        */
-        function labelFormatter(label, series) {
-            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
-            + label
-            + '<br>'
-            + Math.round(series.percent) + '%</div>'
-        }
-    </script>
-
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-    Both of these plugins are recommended to enhance the
-    user experience. -->
-</body>
-
-</html>
+{% endblock %}

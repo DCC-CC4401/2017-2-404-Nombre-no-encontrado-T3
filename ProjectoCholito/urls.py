@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
     url(r'^usuario/', usuario.homeUsuario, name = 'homeUsuario'), #esta linea fue agregada
     url(r'^animales/', views.animales, name='animales'),
+    url(r'^estadisticas/', municipal.estadisticas, name='estadisticas'),
     url(r'$', views.home, name='home'),
 
 ]
