@@ -3,10 +3,12 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, Permission, User
 from app.models import Profile
-
-municipalgroup, created = Group.objects.get_or_create(name='municipal')
-normalusergroup, created = Group.objects.get_or_create(name='usuario')
-users = User.objects.select_related('profile')
+try:
+    municipalgroup, created = Group.objects.get_or_create(name='municipal')
+    normalusergroup, created = Group.objects.get_or_create(name='usuario')
+    users = User.objects.select_related('profile')
+except:
+    pass
 
 def registerbuttonpage(request):
     return render(request, "registerbuttonpage.html")
