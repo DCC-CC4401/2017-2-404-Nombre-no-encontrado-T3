@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-<title>Municipalidad | Cholito</title>
+<title>Modificar Denuncia #{{ denuncia.id  }}</title>
 {% endblock %}
 {% block body %}
     <div class="wrapper">
@@ -108,81 +108,61 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+       <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    Denuncias
-                </h1>
+
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
-                <div class="table-responsive">
-                    <table class="table table-hover"style = "background-color: white">
-                        <thead>
-                            <tr>
-                                {% for value in set_header %}
-                                    <th>{{ value }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for denuncia in set_denuncia %}
+                <div style="vertical-align: middle">
 
-                            <tr onclick="document.location = '{% url 'viewDenuncia' id=denuncia.id  %}';">
+                <head>
+                    <title>Haz tu denuncia</title>
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+                    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+                </head>
+                <body>
+                    <div class="page-header">
+                        <h1>Modificar Denuncia</h1>
+                    </div>
+                    <div class="content container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <br>
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <form method="POST" class="post-form">
+                                    {% csrf_token %}
 
-                                <!--<th>Tipo de Denuncia</th>-->
-                                {% if denuncia.maltrato == "AB" %}
-                                <td>Abandono en la calle</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "EX" %}
-                                <td>Exposición a altas temperaturas</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "FA" %}
-                                <td>Falta de agua</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "FC" %}
-                                <td>Falta de comida</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "VI" %}
-                                <td>Violencia</td>
-                                {% endif %}
-                                {% if denuncia.maltrato == "VA" %}
-                                <td>Venta ambulante</td>
-                                {% endif %}
-                                <!--<th>Tipo de Animal:</th>-->
-                                {% if denuncia.tipo ==  "P"%}
-                                    <td>Perro</td>
-                                {% endif %}
+                                    {{ form.as_table }}
 
-                                {% if denuncia.tipo ==  "G"%}
-                                    <td>Gato</td>
-                                {% endif %}
+                                    <button type="submit" class="save btn btn-default">Enviar!</button>
+                                </form>
 
-                                <!--<th>Dirección</th>-->
-                                <td>{{ denuncia.calle }}</td>
-                                <!--<th>¿Herido?</th>-->
-                                {% if denuncia.herido == "S" %}
-                                    <td>Sí</td>
-                                {% endif %}
-                                {% if denuncia.herido == "N" %}
-                                    <td>No</td>
-                                {% endif %}
-                                {% if denuncia.herido == "D" %}
-                                    <td>Desconocido</td>
-                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
 
-                            </tr>
-
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <!-- /.content -->
-        </div>
         <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
@@ -193,9 +173,7 @@
             </div>
             <!-- Default to the left -->
             <strong>
-                Copyright &copy; 2017
-                <!-- <a href="#">Company</a>. -->
-                Cholito.
+                Copyright &copy; 2017 Cholito.
             </strong>
             All rights reserved.
         </footer>
@@ -297,7 +275,8 @@
                         <div class="form-group">
                             <label for="exampleInputFile">Imagen de perfil</label>
                             <br>
-                            <img src="dist/img/muni-santiago-160x160.png" class="user-image" alt="User Image" width="150">
+                            <img src="{% static "dist/img/user2-160x160.jpg" %}" class="user-image"
+                                 alt="User Image" width="150">
                             <br><br>
                             <input type="file" id="exampleInputFile">
                         </div>
@@ -315,13 +294,11 @@
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 3 -->
-    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="{%  static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <!-- AdminLTE App -->
-    <script src="{%  static 'dist/js/adminlte.min.js' %}"></script>
+    <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-    Both of these plugins are recommended to enhance the
-    user experience. -->
+
 {% endblock %}
