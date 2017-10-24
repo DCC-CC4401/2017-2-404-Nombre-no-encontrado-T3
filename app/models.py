@@ -7,6 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_user = models.BooleanField(default=True)
     is_municipal = models.BooleanField(default=False)
+    is_ong = models.BooleanField(default=False)
     photo = models.ImageField(upload_to="img/userprofile")
 
 
