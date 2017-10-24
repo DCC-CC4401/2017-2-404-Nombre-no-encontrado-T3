@@ -1,7 +1,8 @@
+<!--este archivo fue agregado-->
 {% extends "base.html" %}
 {% load static %}
 {% block extra_head %}
-<title>Haz tu denuncia</title>
+<title>Principal</title>
 {% endblock %}
 
 {% block body %}
@@ -9,7 +10,7 @@
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="{% url 'home' %}" class="logo">
+            <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CH</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -24,11 +25,42 @@
                 </a>
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav"> <!-- este fragmento fue agregado-->
+                       <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="dist/img/muni-santiago-160x160.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">Juan Tapia</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
+                                    <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
+                                    <p>Juan Tapia</p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#myModal">
+                                            Perfil
+                                        </button>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{% url 'logout' %}"  class="btn btn-default btn-flat">Salir</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--<ul class="nav navbar-nav">
                         <li>
                             <a href="{% url 'login' %}">Ingresar</a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </nav>
         </header>
@@ -38,6 +70,15 @@
             <section class="sidebar">
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
+                    <div class="user-panel"> <!--todo este div fue agregado-->
+                        <div class="pull-left image">
+                            <img src="dist/img/muni-santiago-160x160.png" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <!-- <br> -->
+                            <p>Juan Tapia</p>
+                        </div>
+                    </div>
                     <li class="treeview active menu-open">
                         <a href="#">
                             <i class="fa fa-search"></i>
@@ -56,9 +97,6 @@
                                 <select class="form-control">
                                     <option>Perro</option>
                                     <option>Gato</option>
-                                    <option>Loro</option>
-                                    <option>Vaca</option>
-                                    <option>Caballo</option>
                                 </select>
                             </div>
                             <div class="checkbox">
@@ -76,17 +114,17 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{% url 'denuncia' %}">
                             <i class="fa fa-bullhorn"></i>
                             <span>Denunciar</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#">
                             <i class="fa fa-star"></i>
                             <span>ONG</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
@@ -94,54 +132,27 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-       <div class="content-wrapper">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-
+                <h1>Adoptar</h1>
             </section>
             <!-- Main content -->
             <section class="content container-fluid">
+
                 <div style="vertical-align: middle">
 
-                <head>
-                    <title>Haz tu denuncia</title>
-                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-                    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-                </head>
-                <body>
-                    <div class="page-header">
-                        <a href="{% url 'denuncia' %}" class="top-menu"></a>
-                        <h1>Haz tu denuncia!</h1>
-                    </div>
-                    <div class="content container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                {% if messages %}
-                                    <ul class="messages">
-                                    {% for message in messages %}
-                                    <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
-                                    {% endfor %}
-                                    </ul>
-                                {% endif %}
-                                <br>
-                                <form method="POST" class="post-form">
-                                    {% csrf_token %}
+                <img src="{% static 'img/mapaHome.png' %}" style="width: 100%;" usemap="#locationmap">
 
-                                    {{ form.as_p }}
+                <map name="locationmap">
 
-                                    <button type="submit" class="save btn btn-default">Enviar!</button>
-                                </form>
+                </map>
 
-                            </div>
-                        </div>
-                    </div>
-                </body>
             </div>
-        </section>
-        <!-- /.content -->
-    </div>
 
+            </section>
+            <!-- /.content -->
+        </div>
         <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
@@ -249,7 +260,7 @@
                     <form>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nombre</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" value="Municipalidad de Santiago">
+                            <input type="email" class="form-control" id="exampleInputEmail1" value="Juan Tapia"> <!--cambio value MunStgo-->
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Imagen de perfil</label>
@@ -279,5 +290,58 @@
     <!-- AdminLTE App -->
     <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+    Both of these plugins are recommended to enhance the
+    user experience. -->
+
+    <script>
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            var myCenter = new google.maps.LatLng(-33.457394,-70.664601);
+            var centerOne= new google.maps.LatLng(-33.453291,-70.667269);
+            var centerTwo = new google.maps.LatLng(-33.455908, -70.674335);
+            var centerThree = new google.maps.LatLng(-33.466617, -70.676903);
+            var mapOptions = {center: myCenter, zoom: 15};
+            var map = new google.maps.Map(mapCanvas,mapOptions);
+            var myCity = new google.maps.Circle({
+                center: myCenter,
+                radius: 15,
+                strokeColor: "#0000FF",
+                strokeOpacity: 0.7,
+                strokeWeight: 2,
+                fillColor: "#0000FF",
+                fillOpacity: 0.4
+            });
+            var map = new google.maps.Map(mapCanvas,mapOptions);
+            myCity.setMap(map);
+            google.maps.event.addListener(map, 'click', function(event) {
+                placeMarker(map, event.latLng);
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content:"ONG Favorita"
+            });
+            var markerOne = new google.maps.Marker({
+                position: centerOne,
+                icon: "favorito.png"
+            });
+            markerOne.setMap(map);
+            infowindow.open(map,markerOne);
+        }
+
+        function placeMarker(map, location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Nombre ONG'
+            });
+            infowindow.open(map,marker);
+        }
+    </script>
+    <!-- Mapa de google -->
+    <!--
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKrwK5Ra7Lrbam0i1ifeMrlPHnN1Tctpk&callback=myMap"></script>
+    -->
 
 {% endblock %}

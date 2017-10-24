@@ -81,6 +81,7 @@ class DenunciaForm(forms.ModelForm):
         super(DenunciaForm, self).__init__(*args, **kwargs)
         self.fields['comuna'] = forms.ChoiceField(
             choices=getComunas())
+
     MALTRATO = (
         ("AB", "Abandono en la calle"),
         ("EX", "Exposición a altas temperaturas"),
@@ -113,7 +114,6 @@ class DenunciaForm(forms.ModelForm):
     herido = forms.ChoiceField(choices=HERIDO)
     maltrato = forms.ChoiceField(choices=MALTRATO)
     calle = forms.CharField(max_length=50)
-    #comuna = forms.ChoiceField(choices=getComunas())
     comentario = forms.CharField(max_length=40, required=False)
     estado = forms.ChoiceField(choices=(("RE", "Reportada"),))
 

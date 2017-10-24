@@ -14,4 +14,3 @@ def getComunas():
         pass
     return tuple(choices)
 
-

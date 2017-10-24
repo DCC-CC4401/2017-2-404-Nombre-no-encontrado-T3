@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from app import views, auth, municipal
+from app import views, auth, municipal, usuario #se agrego usuario al import
 
 urlpatterns = [
     url(r'^login/$', auth.login_view, name ='login'),
@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^municipalidad/denuncias/', municipal.listaDenuncias, name = 'listaDenuncias'),
     url(r'^municipalidad/', municipal.homeMunicipalidad, name = 'homeMunicipalidad'),
     url(r'^registermiddlepage/', auth.registerbuttonpage, name = 'registerbuttonpage' ),
+    url(r'^usuario/', usuario.homeUsuario, name = 'homeUsuario'), #esta linea fue agregada
     url(r'^animales/', views.animales, name='animales'),
     url(r'$', views.home, name='home'),
 
